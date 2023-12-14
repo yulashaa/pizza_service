@@ -1,13 +1,20 @@
 package com.example.pizza_service.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.ArrayList;
+import java.util.List;
 
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "orders")
-public class Order implements Comparable<Order> {
+public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,8 +25,8 @@ public class Order implements Comparable<Order> {
     @JoinColumn(name = "user_id")
     private User customer;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "order")
-    private Set<Pizza> pizzas = new TreeSet<>();
+    @OneToMany()
+    private List<Pizza> pizzas = new ArrayList<>();
 
     @Column(name = "final_price")
     private Double price = 0.0;
@@ -27,35 +34,20 @@ public class Order implements Comparable<Order> {
     @Column(name = "is_active")
     private Boolean isActive;
 
-    public Order() {
+    public Boolean getActive() {
+        return isActive;
     }
 
+    public void setActive(Boolean active) {
+        isActive = active;
+    }
     public Order(User customer, boolean isActive) {
         this.customer = customer;
         this.isActive = isActive;
     }
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public User getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(User customer) {
-        this.customer = customer;
-    }
-
-    public Set<Pizza> getPizzas() {
-        return pizzas;
-    }
-
-    public void setPizzas(Set<Pizza> pizzas) {
+    public void setPizzas(List<Pizza> pizzas) {
         this.pizzas = pizzas;
         price = 0.0;
         pizzas.forEach(pizza -> price += pizza.getPrice());
@@ -66,28 +58,5 @@ public class Order implements Comparable<Order> {
         pizzas.add(pizza);
     }
 
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public Boolean getActive() {
-        return isActive;
-    }
-
-    public void setActive(Boolean active) {
-        isActive = active;
-    }
-
-    @Override
-    public int compareTo(Order order) {
-        if (id == null) return 1;
-        if (order.getId() == null) return -1;
-
-        return id.compareTo(order.getId());
-    }
 
 }

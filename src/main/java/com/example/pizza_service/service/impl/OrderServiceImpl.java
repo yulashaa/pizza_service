@@ -7,27 +7,27 @@ import com.example.pizza_service.entity.User;
 import com.example.pizza_service.repository.OrderRepository;
 import com.example.pizza_service.repository.UserRepository;
 import com.example.pizza_service.service.OrderService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
     private final UserRepository userRepository;
 
-    public OrderServiceImpl(OrderRepository orderRepository, UserRepository userRepository) {
-        this.orderRepository = orderRepository;
-        this.userRepository = userRepository;
-    }
-
     @Override
     public Map<String, Object> confirmOrder(Long id) {
         Order order = orderRepository.findById(id).orElseThrow(() -> new IllegalStateException("Order not found"));
-        if (!order.getActive()) throw new IllegalStateException("Order isn't active anymore");
+        if (!order.getActive()) {
+            throw new IllegalStateException("Order isn't active anymore");
+        }
         order.setActive(false);
         orderRepository.save(order);
 
@@ -49,6 +49,9 @@ public class OrderServiceImpl implements OrderService {
     public List<OrderDTO> getUserOrders(Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new IllegalStateException("User not found"));
 
-        return user.getOrders().stream().map(OrderDTO::toDTO).toList();
+        return user.getOrders()
+                .stream()
+                .map(order -> OrderDTO.toDTO(order))
+                .collect(Collectors.toList());
     }
 }

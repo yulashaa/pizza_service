@@ -7,7 +7,6 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @EntityScan(basePackages = {"com.example.pizza_service.entity"})
-//@ComponentScan(basePackages = {"com.example.pizza_service"})
 public class PizzaServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PizzaServiceApplication.class, args);

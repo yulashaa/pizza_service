@@ -2,11 +2,15 @@ package com.example.pizza_service.dto;
 
 
 import com.example.pizza_service.entity.Order;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
-
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class OrderDTO {
-
     private Long id;
     private Long userId;
 
@@ -14,40 +18,6 @@ public class OrderDTO {
 
     private List<PizzaDTO> pizzas;
 
-    public OrderDTO() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public List<PizzaDTO> getPizzas() {
-        return pizzas;
-    }
-
-    public void setPizzas(List<PizzaDTO> pizzas) {
-        this.pizzas = pizzas;
-    }
 
     public static OrderDTO toDTO(Order order) {
         OrderDTO dto = new OrderDTO();
