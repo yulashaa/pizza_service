@@ -22,7 +22,7 @@ public class OrderController {
     public ResponseEntity confirmOrder(@Valid @RequestBody IdDTO idDTO) {
         return ResponseEntity.status(HttpStatus.OK).body(orderService.confirmOrder(idDTO.getId()));
     }
-
+  
     @GetMapping("/{id}")
     public ResponseEntity getOrder(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(orderService.getOrder(id));
