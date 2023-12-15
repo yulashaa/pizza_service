@@ -1,6 +1,5 @@
 package com.example.pizza_service.dto;
 
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
@@ -10,7 +9,7 @@ public class IdDTO {
     private Long id;
 }
 
-public class IdDTO {
+public class яIdDTO {
     @NotNull
     private Long id;
 

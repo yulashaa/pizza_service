@@ -21,13 +21,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Long createUser(UserDTO userDTO) {
-        User user = userRepository.save(UserDTO.fromDTO(userDTO));
+        final User user = userRepository.save(UserDTO.fromDTO(userDTO));
         return user.getId();
     }
 
     @Override
     public UserDTO getById(Long id) {
-        Optional<User> optionalUser = userRepository.findById(id);
+        final Optional<User> optionalUser = userRepository.findById(id);
         return optionalUser.map(UserDTO::toDTO).orElse(null);
     }
 
