@@ -1,11 +1,17 @@
 package com.example.pizza_service.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Topping implements Comparable<Topping> {
 
@@ -20,38 +26,6 @@ public class Topping implements Comparable<Topping> {
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "toppings")
     private Set<Pizza> pizzas = new TreeSet<>();
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public Set<Pizza> getPizzas() {
-        return pizzas;
-    }
-
-    public void setPizzas(Set<Pizza> pizzas) {
-        this.pizzas = pizzas;
-    }
 
     @Override
     public int compareTo(Topping topping) {

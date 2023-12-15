@@ -3,37 +3,20 @@ package com.example.pizza_service.dto;
 
 import com.example.pizza_service.entity.Topping;
 import com.example.pizza_service.enums.Toppings;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ToppingDTO {
 
     private Long id;
     private String name;
-
     private Double price;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
+    private Double price;
 
     public static ToppingDTO toDTO(Topping topping) {
         ToppingDTO dto = new ToppingDTO();

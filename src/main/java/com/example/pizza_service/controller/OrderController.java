@@ -16,12 +16,12 @@ public class OrderController {
     public OrderController(OrderService orderService) {
         this.orderService = orderService;
     }
-
+  
     @PostMapping("/confirm") //body {"id": 1}
     public ResponseEntity confirmOrder(@Valid @RequestBody IdDTO idDTO) {
         return ResponseEntity.status(HttpStatus.OK).body(orderService.confirmOrder(idDTO.getId()));
     }
-
+  
     @GetMapping("/{id}")
     public ResponseEntity getOrder(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(orderService.getOrder(id));
