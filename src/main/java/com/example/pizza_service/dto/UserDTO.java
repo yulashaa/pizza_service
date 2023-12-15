@@ -2,43 +2,26 @@ package com.example.pizza_service.dto;
 
 import com.example.pizza_service.entity.User;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserDTO {
     private Long id;
+    @NotNull
     @NotBlank
     private String firstName;
+    @NotNull
     @NotBlank
     private String lastName;
 
-    private UserDTO() {
-    }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public static UserDTO toDTO(User user) {
-        UserDTO dto = new UserDTO();
+    public static UserDTO toDTO(final User user) {
+        final UserDTO dto = new UserDTO();
         dto.setId(user.getId());
         dto.setFirstName(user.getFirstName());
         dto.setLastName(user.getLastName());
@@ -46,7 +29,7 @@ public class UserDTO {
         return dto;
     }
 
-    public static User fromDTO(UserDTO dto) {
+    public static User fromDTO(final UserDTO dto) {
         return new User(dto.getFirstName(), dto.getLastName());
     }
 }

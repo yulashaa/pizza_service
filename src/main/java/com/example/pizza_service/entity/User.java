@@ -1,10 +1,15 @@
 package com.example.pizza_service.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
-
+@Data
+@AllArgsConstructor
 @Entity
 @Table(name = "users")
 public class User {
@@ -19,46 +24,15 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "customer")
-    private Set<Order> orders = new TreeSet<>();
+    @OneToMany(mappedBy = "customer")
+    private List<Order> orders = new ArrayList<>();
 
     public User() {
     }
 
-    public User(String firstName, String lastName) {
+    public User(final String firstName,final String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public Set<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(Set<Order> orders) {
-        this.orders = orders;
-    }
 }

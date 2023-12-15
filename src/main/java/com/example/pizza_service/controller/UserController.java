@@ -15,7 +15,7 @@ public class UserController {
 
     private final UserService service;
 
-    public UserController(UserService service) {
+    public UserController(final UserService service) {
         this.service = service;
     }
 
@@ -25,16 +25,16 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity getUser(@PathVariable Long id) {
-        UserDTO user = service.getById(id);
+    public ResponseEntity getUser(@PathVariable final Long id) {
+        final UserDTO user = service.getById(id);
 
         return user == null
                 ? ResponseEntity.status(HttpStatus.NOT_FOUND).build()
                 : ResponseEntity.status(HttpStatus.OK).body(user);
     }
 
-    @PostMapping("/create")  //body {"firstName": "name", "lastName": "surname"}
-    public ResponseEntity create(@Valid @RequestBody UserDTO user) {
+    @PostMapping("/create")
+    public ResponseEntity create(@Valid @RequestBody final UserDTO user) {
         return ResponseEntity.status(HttpStatus.CREATED).body(new IdDTO(service.createUser(user)));
     }
 
