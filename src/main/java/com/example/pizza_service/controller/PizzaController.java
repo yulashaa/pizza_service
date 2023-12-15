@@ -1,6 +1,5 @@
 package com.example.pizza_service.controller;
 
-
 import com.example.pizza_service.dto.AddPizzaDTO;
 import com.example.pizza_service.dto.IdDTO;
 import com.example.pizza_service.service.PizzaService;
@@ -19,15 +18,15 @@ public class PizzaController {
         this.pizzaService = pizzaService;
     }
 
-    @PostMapping("/add")  //body {"userId": 1, "type": "pizza1", (optional)"toppings":[{"name": "topping1},{"name": "topping2}]}
-    public ResponseEntity addPizza(@Valid @RequestBody AddPizzaDTO pizza) {
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(new IdDTO(pizzaService.addPizza(pizza.getUserId(), pizza)));
+    @PostMapping("/add")
+    public ResponseEntity<IdDTO> addPizza(@Valid @RequestBody AddPizzaDTO pizza) {
+        Long userId = pizza.getUserId();
+        IdDTO idDTO = new IdDTO(pizzaService.addPizza(userId, pizza));
+        return ResponseEntity.status(HttpStatus.CREATED).body(idDTO);
     }
 
     @GetMapping("/all")
-    public ResponseEntity getAll() {
+    public ResponseEntity<Object> getAll() {
         return ResponseEntity.status(HttpStatus.OK).body(pizzaService.getAll());
     }
 }

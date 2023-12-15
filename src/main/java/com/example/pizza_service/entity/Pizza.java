@@ -67,14 +67,16 @@ public class Pizza implements Comparable<Pizza> {
 
     public void setToppings(Set<Topping> toppings) {
         this.toppings = toppings;
+        updatePrice();
     }
 
     public void addToppings(Collection<Topping> toppings) {
         this.toppings.addAll(toppings);
+        updatePrice();
+    }
 
-        for (Topping topping : toppings) {
-            price += topping.getPrice();
-        }
+    private void updatePrice() {
+        price = toppings.stream().mapToDouble(Topping::getPrice).sum();
     }
 
     public Order getOrder() {
