@@ -1,7 +1,5 @@
 package com.example.pizza_service.enums;
 
-
-
 public enum Pizzas {
     PIZZA1("pizza1", 150.0),
     PIZZA2("pizza2", 200.0);

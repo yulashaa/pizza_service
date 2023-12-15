@@ -16,6 +16,8 @@ public class ToppingDTO {
     private String name;
     private Double price;
 
+    private Double price;
+
     public static ToppingDTO toDTO(Topping topping) {
         ToppingDTO dto = new ToppingDTO();
         dto.setName(topping.getName());
